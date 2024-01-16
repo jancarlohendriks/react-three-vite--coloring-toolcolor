@@ -1,14 +1,15 @@
 // Scene.tsx
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useColorContext } from "./ColorContext";
-import model from "@/assets/jersey.gltf?url";
+import { Mesh } from "three";
+
+import { useColorContext } from "./Store/ColorContext";
 
 const Scene: React.FC = () => {
-  const gltf = useLoader(GLTFLoader, model);
-  const { pickedColor } = useColorContext()!;
+  const { currentModel, pickedColor } = useColorContext();
+  const gltf = useLoader(GLTFLoader, currentModel);
 
   const handlePointClick = useCallback(
     ({ object: { material } }) => {
@@ -16,6 +17,27 @@ const Scene: React.FC = () => {
     },
     [pickedColor]
   );
+
+  useEffect(() => {
+    // Dispose of the previous model's resources
+    return () => {
+      gltf.scene.traverse(child => {
+        if (child instanceof Mesh) {
+          const mesh = child;
+          if (mesh.material) {
+            // Dispose of material resources
+            mesh.material.dispose();
+            // Dispose of texture resources if applicable
+            if (mesh.material.map) {
+              mesh.material.map.dispose();
+            }
+          }
+          // Dispose of geometry resources
+          mesh.geometry.dispose();
+        }
+      });
+    };
+  }, [gltf]);
 
   return (
     <>
