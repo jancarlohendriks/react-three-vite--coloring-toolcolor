@@ -4,6 +4,12 @@ _A simple React Three Fiber + Vite starter with an import-ready CodeSandbox conf
 
 ![Preview](/public/preview.gif)
 
+### Compress Model
+
+```bash
+npx gltfjsx model.gltf --transform
+```
+
 ### Resources:
 
 - [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/): Three.js Renderer
@@ -26,5 +32,7 @@ npm run build
 npm run preview
 npm run sandbox
 ```
+
 ### CodeSandbox
+
 To create a sandbox from this starter, [import your repository URL](https://codesandbox.io/dashboard/repositories) (this repo works too), or [fork this template](https://codesandbox.io/s/react-three-fiber-vite-starter-r1tgld).

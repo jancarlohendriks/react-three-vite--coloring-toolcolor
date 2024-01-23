@@ -28,7 +28,7 @@ type GLTFResult = GLTF & {
 
 export function Model(props: any) {
   const { pickedColor } = useColorContext();
-  const { nodes, materials } = useGLTF("/jersey.gltf") as GLTFResult;
+  const { nodes, materials } = useGLTF("/jersey-transformed.glb") as GLTFResult;
   const { currentModel } = useModelContext();
 
   const handlePointClick = (e: any) => {
@@ -74,4 +74,4 @@ export function Model(props: any) {
   );
 }
 
-useGLTF.preload("/jersey.gltf");
+useGLTF.preload("/jersey-transformed.glb");
