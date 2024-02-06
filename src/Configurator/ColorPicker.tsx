@@ -1,6 +1,6 @@
 import React from "react";
 import { ChromePicker } from "react-color";
-import { useColorContext } from "./store/ColorContext";
+import { useColorContext } from "../store/ColorContext";
 
 const ColorPicker: React.FC = () => {
   const { pickedColor, handleColorChange } = useColorContext();

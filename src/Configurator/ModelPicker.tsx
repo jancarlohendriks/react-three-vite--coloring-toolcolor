@@ -1,5 +1,5 @@
 import React from "react";
-import { useModelContext } from "./store/ModelContext";
+import { useModelContext } from "../store/ModelContext";
 
 const ModelPicker: React.FC = () => {
   const { models, currentModel, setModel } = useModelContext();

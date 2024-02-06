@@ -1,7 +1,4 @@
-// ColorContext.tsx
-
-import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
-// import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 interface ColorContextProps {
@@ -28,28 +25,6 @@ export const ColorProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const setModel = (model: string) => {
     setCurrentModel(model);
-  };
-
-  // Memoize the GLTF loader to avoid re-creating it on every render
-  const gltfLoader = useMemo(() => new GLTFLoader(), []);
-
-  // Load a model and store it in the cache
-  const loadModel = async (modelPath: string): Promise<GLTF> => {
-    if (modelCache[modelPath]) {
-      // Return the cached model if it exists
-      return modelCache[modelPath];
-    }
-
-    // Load the model if it's not in the cache
-    const loadedModel = await gltfLoader.loadAsync(modelPath);
-
-    // Update the cache
-    setModelCache(prevCache => ({
-      ...prevCache,
-      [modelPath]: loadedModel,
-    }));
-
-    return loadedModel;
   };
 
   return <ColorContext.Provider value={{ pickedColor, handleColorChange, currentModel, setModel }}>{children}</ColorContext.Provider>;

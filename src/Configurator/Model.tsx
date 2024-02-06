@@ -6,8 +6,8 @@ import * as THREE from "three";
 import React, { useRef, useState } from "react";
 import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useColorContext } from "./store/ColorContext";
-import { useModelContext } from "./store/ModelContext";
+import { useColorContext } from "../store/ColorContext";
+import { useModelContext } from "../store/ModelContext";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -26,9 +26,11 @@ type GLTFResult = GLTF & {
 // USE https://gltf.pmnd.rs/
 // Convert all delivered models to React component and use the meshes in the groups to select which model is active
 
+const fileUrl = "/jersey-transformed.glb";
+
 export function Model(props: any) {
   const { pickedColor } = useColorContext();
-  const { nodes, materials } = useGLTF("/jersey-transformed.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF(fileUrl) as GLTFResult;
   const { currentModel } = useModelContext();
 
   const handlePointClick = (e: any) => {
@@ -74,4 +76,4 @@ export function Model(props: any) {
   );
 }
 
-useGLTF.preload("/jersey-transformed.glb");
+useGLTF.preload(fileUrl);
